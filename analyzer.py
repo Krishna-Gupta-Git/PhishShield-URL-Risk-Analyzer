@@ -1,83 +1,62 @@
-import re
 from urllib.parse import urlparse
-
-# Common phishing keywords
-SUSPICIOUS_WORDS = [
-    "login",
-    "verify",
-    "bank",
-    "secure",
-    "update",
-    "account",
-    "password"
-]
-
-# Common URL shorteners
-SHORTENERS = [
-    "bit.ly",
-    "tinyurl.com",
-    "goo.gl",
-    "t.co"
-]
+import re
 
 
 def analyze_url(url):
 
-    results = {}
+    parsed = urlparse(url)
 
-    # -----------------------------
-    # URL Length
-    # -----------------------------
-    results["length"] = len(url)
+    domain = parsed.netloc
 
-    # -----------------------------
+    suspicious_words = [
+        "login",
+        "verify",
+        "bank",
+        "secure",
+        "update",
+        "account",
+        "password",
+        "signin"
+    ]
+
+    shorteners = [
+        "bit.ly",
+        "tinyurl.com",
+        "goo.gl",
+        "t.co",
+        "is.gd",
+        "ow.ly"
+    ]
+
+    result = {}
+
     # HTTPS
-    # -----------------------------
-    results["https"] = url.startswith("https://")
+    result["https"] = url.startswith("https://")
 
-    # -----------------------------
-    # IP Address Detection
-    # -----------------------------
-    ip_pattern = r"^(http://|https://)?(\d{1,3}\.){3}\d{1,3}"
+    # Length
+    result["length"] = len(url)
 
-    results["ip_address"] = bool(
-        re.match(ip_pattern, url)
+    # IP Address
+    result["ip_address"] = bool(
+        re.match(r"^\d+\.\d+\.\d+\.\d+$", domain)
     )
 
-    # -----------------------------
     # Suspicious Words
-    # -----------------------------
     found_words = []
 
-    lower_url = url.lower()
-
-    for word in SUSPICIOUS_WORDS:
-
-        if word in lower_url:
+    for word in suspicious_words:
+        if word in url.lower():
             found_words.append(word)
 
-    results["suspicious_words"] = found_words
+    result["suspicious_words"] = found_words
 
-    # -----------------------------
     # Hyphen
-    # -----------------------------
-    domain = urlparse(url).netloc
+    result["hyphen"] = "-" in domain
 
-    results["hyphen"] = "-" in domain
+    # Multiple Subdomains
+    result["subdomains"] = domain.count(".")
 
-    # -----------------------------
-    # Subdomains
-    # -----------------------------
-    dot_count = domain.count(".")
+    # URL Shortener
+    result["shortened"] = domain in shorteners
 
-    results["subdomains"] = dot_count
-
-    # -----------------------------
-    # Shortened URL
-    # -----------------------------
-    results["shortened"] = any(
-        short in domain
-        for short in SHORTENERS
-    )
-
-    return results
+    return result

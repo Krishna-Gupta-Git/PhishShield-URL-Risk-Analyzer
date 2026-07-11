@@ -11,8 +11,32 @@
 <div class="container">
 
 <h2>Analysis Result</h2>
-
 <p><strong>URL:</strong> {{ url }}</p>
+
+<h3>Risk Score: {{ score }}%</h3>
+
+<h3>
+Risk Level:
+
+{% if risk_level == "Low Risk" %}
+<span style="color:green;">
+    {{ risk_level }}
+</span>
+
+{% elif risk_level == "Medium Risk" %}
+<span style="color:orange;">
+    {{ risk_level }}
+</span>
+
+{% else %}
+<span style="color:red;">
+    {{ risk_level }}
+</span>
+{% endif %}
+
+</h3>
+
+
 
 <table border="1" cellpadding="10">
 
@@ -23,43 +47,51 @@
 
 <tr>
     <td>Length</td>
-    <td>{{ results.length }}</td>
+    <td>{{ result.length }}</td>
 </tr>
 
 <tr>
     <td>HTTPS</td>
-    <td>{{ results.https }}</td>
+    <td>{{ result.https }}</td>
 </tr>
 
 <tr>
     <td>Uses IP Address</td>
-    <td>{{ results.ip_address }}</td>
+    <td>{{ result.ip_address }}</td>
 </tr>
 
 <tr>
     <td>Suspicious Words</td>
-    <td>{{ results.suspicious_words }}</td>
+    <td>{{ result.suspicious_words }}</td>
 </tr>
 
 <tr>
     <td>Hyphen</td>
-    <td>{{ results.hyphen }}</td>
+    <td>{{ result.hyphen }}</td>
 </tr>
 
 <tr>
     <td>Subdomains</td>
-    <td>{{ results.subdomains }}</td>
+    <td>{{ result.subdomains }}</td>
 </tr>
 
 <tr>
     <td>Shortened URL</td>
-    <td>{{ results.shortened }}</td>
+    <td>{{ result.shortened }}</td>
 </tr>
 
 </table>
 
 <br>
-
+{% if reasons %}
+<ul>
+{% for reason in reasons %}
+    <li>{{ reason }}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No suspicious indicators detected.</p>
+{% endif %}
 <a href="/">Analyze another URL</a>
 
 </div>
