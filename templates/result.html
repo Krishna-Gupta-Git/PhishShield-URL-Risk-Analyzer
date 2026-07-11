@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Analysis Result</h2>
+
+<p><strong>URL:</strong> {{ url }}</p>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Feature</th>
+    <th>Result</th>
+</tr>
+
+<tr>
+    <td>Length</td>
+    <td>{{ results.length }}</td>
+</tr>
+
+<tr>
+    <td>HTTPS</td>
+    <td>{{ results.https }}</td>
+</tr>
+
+<tr>
+    <td>Uses IP Address</td>
+    <td>{{ results.ip_address }}</td>
+</tr>
+
+<tr>
+    <td>Suspicious Words</td>
+    <td>{{ results.suspicious_words }}</td>
+</tr>
+
+<tr>
+    <td>Hyphen</td>
+    <td>{{ results.hyphen }}</td>
+</tr>
+
+<tr>
+    <td>Subdomains</td>
+    <td>{{ results.subdomains }}</td>
+</tr>
+
+<tr>
+    <td>Shortened URL</td>
+    <td>{{ results.shortened }}</td>
+</tr>
+
+</table>
+
+<br>
+
+<a href="/">Analyze another URL</a>
+
+</div>
+
+</body>
+
+</html>

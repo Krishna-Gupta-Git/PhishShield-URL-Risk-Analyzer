@@ -18,15 +18,20 @@
 
         <form>
 
-            <input
-                type="text"
-                placeholder="https://example.com"
-            >
+            <form action="/analyze" method="POST">
 
-            <button>
-                Analyze URL
-            </button>
+    <input
+        type="text"
+        name="url"
+        placeholder="https://example.com"
+        required
+    >
 
+    <button type="submit">
+        Analyze URL
+    </button>
+
+</form>
         </form>
 
     </div>

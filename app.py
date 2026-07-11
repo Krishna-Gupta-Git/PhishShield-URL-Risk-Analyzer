@@ -1,13 +1,27 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from analyzer import analyze_url
 
-# Create a Flask application
 app = Flask(__name__)
 
-# Home page route
+
 @app.route("/")
 def home():
     return render_template("index.html")
 
-# Run the application
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+
+    url = request.form["url"]
+
+    results = analyze_url(url)
+
+    return render_template(
+        "result.html",
+        url=url,
+        results=results
+    )
+
+
 if __name__ == "__main__":
     app.run(debug=True)
