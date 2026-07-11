@@ -33,3 +33,22 @@ button {
 button:hover {
     background: #084298;
 }
+.low{
+    color:green;
+    font-weight:bold;
+}
+
+.medium{
+    color:orange;
+    font-weight:bold;
+}
+
+.high{
+    color:red;
+    font-weight:bold;
+}
+
+ul{
+    text-align:left;
+    display:inline-block;
+}

@@ -36,8 +36,6 @@ Risk Level:
 
 </h3>
 
-
-
 <table border="1" cellpadding="10">
 
 <tr>
@@ -84,14 +82,24 @@ Risk Level:
 
 <br>
 {% if reasons %}
+<h3>Detected Issues</h3>
+
 <ul>
 {% for reason in reasons %}
     <li>{{ reason }}</li>
 {% endfor %}
 </ul>
+
 {% else %}
 <p>No suspicious indicators detected.</p>
 {% endif %}
+
+<h3>Recommendation</h3>
+
+<p>{{ recommendation }}</p>
+
+<br>
+
 <a href="/">Analyze another URL</a>
 
 </div>
