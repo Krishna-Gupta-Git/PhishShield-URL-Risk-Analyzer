@@ -1,72 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History</title>
 
-<title>Scan History</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>📜 Scan History</h1>
+    <h1>📜 Scan History</h1>
 
-<table class="feature-table">
+    <table class="feature-table">
 
-<tr>
+        <tr>
+            <th>ID</th>
+            <th>URL</th>
+            <th>Risk Score</th>
+            <th>Risk Level</th>
+            <th>Scan Time</th>
+        </tr>
 
-<th>ID</th>
+        {% if history %}
 
-<th>URL</th>
+            {% for scan in history %}
 
-<th>Risk Score</th>
+            <tr>
 
-<th>Risk Level</th>
+                <td>{{ scan[0] }}</td>
 
-<th>Scan Time</th>
+                <td>{{ scan[1] }}</td>
 
-</tr>
+                <td>{{ scan[2] }}%</td>
 
-{% for scan in history %}
+                <td>
 
-<tr>
+                    {% if scan[3] == "Low Risk" %}
 
-<td>{{ scan[0] }}</td>
+                        <span class="low">🟢 {{ scan[3] }}</span>
 
-<td>{{ scan[1] }}</td>
+                    {% elif scan[3] == "Medium Risk" %}
 
-<td>{{ scan[2] }}%</td>
+                        <span class="medium">🟡 {{ scan[3] }}</span>
 
-<td>{{ scan[3] }}</td>
+                    {% else %}
 
-<td>{{ scan[4] }}</td>
+                        <span class="high">🔴 {{ scan[3] }}</span>
 
-</tr>
+                    {% endif %}
 
-{% endfor %}
-<td>
-{% if scan[3] == "Low Risk" %}
-<span class="low">🟢 {{ scan[3] }}</span>
+                </td>
 
-{% elif scan[3] == "Medium Risk" %}
-<span class="medium">🟡 {{ scan[3] }}</span>
+                <td>{{ scan[4] }}</td>
 
-{% else %}
-<span class="high">🔴 {{ scan[3] }}</span>
+            </tr>
 
-{% endif %}
-</td>
+            {% endfor %}
 
-</table>
+        {% else %}
 
-<br>
+            <tr>
+                <td colspan="5">No scan history available.</td>
+            </tr>
 
-<a href="/">← Back to Home</a>
+        {% endif %}
+
+    </table>
+
+    <br><br>
+
+    <a href="/">⬅ Back to Home</a>
 
 </div>
 

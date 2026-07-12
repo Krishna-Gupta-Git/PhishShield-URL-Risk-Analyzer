@@ -1,250 +1,361 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Analysis Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishShield - Analysis Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>🛡️ PhishShield</h1>
+    <h1>🛡️ PhishShield</h1>
 
-<h2>Analysis Report</h2>
+    <h2>Analysis Report</h2>
 
-<p>
-<strong>Scanned URL:</strong><br>
-{{ url }}
-</p>
+    <p>
+        <strong>Scanned URL:</strong><br>
+        {{ url }}
+    </p>
 
-<h2>Risk Score</h2>
+    <hr>
 
-<h3>{{ score }}%</h3>
-<div class="progress-container">
+    <h2>Risk Score</h2>
 
-<div
-class="progress-bar
+    <h3>{{ score }}%</h3>
 
-{% if score >= 70 %}
-high-bar
-{% elif score >= 40 %}
-medium-bar
-{% else %}
-low-bar
-{% endif %}"
- {{ score }}%;>
-</div>
+    <div class="progress-container">
 
-</div>
-<h2>Risk Level</h2>
+        <div class="progress-bar
 
-{% if risk_level == "Low Risk" %}
-<p class="low">🟢 {{ risk_level }}</p>
+            {% if score >= 70 %}
+                high-bar
+            {% elif score >= 40 %}
+                medium-bar
+            {% else %}
+                low-bar
+            {% endif %}
 
-{% elif risk_level == "Medium Risk" %}
-<p class="medium">🟡 {{ risk_level }}</p>
+        "
 
-{% else %}
-<p class="high">🔴 {{ risk_level }}</p>
+        {{ score }}%;">
 
-{% endif %}
+        </div>
 
-</h3>
-<center>
+    </div>
+
+    <h2>Risk Level</h2>
+
+    {% if risk_level == "Low Risk" %}
+
+        <p class="low">🟢 {{ risk_level }}</p>
+
+    {% elif risk_level == "Medium Risk" %}
+
+        <p class="medium">🟡 {{ risk_level }}</p>
+
+    {% else %}
+
+        <p class="high">🔴 {{ risk_level }}</p>
+
+    {% endif %}
+
+    <hr>
+
     <h2>URL Feature Analysis</h2>
-<table class="feature-table">
-<tr>
-    <th>Feature</th>
-    <th>Result</th>
-</tr>
 
-<tr>
-    <td>Length</td>
-    <td>{{ result.length }}</td>
-</tr>
+    <table class="feature-table">
 
-<tr>
-    <td>HTTPS</td>
-    <td>{{ result.https }}</td>
-</tr>
+        <tr>
+            <th>Feature</th>
+            <th>Result</th>
+        </tr>
 
-<tr>
-    <td>Uses IP Address</td>
-    <td>{{ result.ip_address }}</td>
-</tr>
+        <tr>
+            <td>HTTPS</td>
+            <td>{{ result.https }}</td>
+        </tr>
 
-<tr>
-    <td>Suspicious Words</td>
-    <td>{{ result.suspicious_words }}</td>
-</tr>
+        <tr>
+            <td>URL Length</td>
+            <td>{{ result.length }}</td>
+        </tr>
 
-<tr>
-    <td>Hyphen</td>
-    <td>{{ result.hyphen }}</td>
-</tr>
+        <tr>
+            <td>Uses IP Address</td>
+            <td>{{ result.ip_address }}</td>
+        </tr>
 
-<tr>
-    <td>Subdomains</td>
-    <td>{{ result.subdomains }}</td>
-</tr>
+        <tr>
+            <td>Hyphen in Domain</td>
+            <td>{{ result.hyphen }}</td>
+        </tr>
 
-<tr>
-    <td>Shortened URL</td>
-    <td>{{ result.shortened }}</td>
-</tr>
+        <tr>
+            <td>Subdomains</td>
+            <td>{{ result.subdomains }}</td>
+        </tr>
 
-</table>
-</center>
+        <tr>
+            <td>Shortened URL</td>
+            <td>{{ result.shortened }}</td>
+        </tr>
 
-<br>
-{% if reasons %}
-<h3>Detected Issues</h3>
+        <tr>
+            <td>Suspicious Words</td>
 
-<ul>
-{% for reason in reasons %}
-    <li>{{ reason }}</li>
-{% endfor %}
-</ul>
+            <td>
 
-{% else %}
-<p>No suspicious indicators detected.</p>
-{% endif %}
+                {% if result.suspicious_words %}
 
-<h3>Security Recommendation</h3>
+                    {{ result.suspicious_words | join(", ") }}
 
-<div class="recommendation">
-{{ recommendation }}
+                {% else %}
+
+                    None
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <hr>
+
+    <h2>Detected Issues</h2>
+
+    {% if reasons %}
+
+        <ul>
+
+            {% for reason in reasons %}
+
+                <li>{{ reason }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>No suspicious indicators detected.</p>
+
+    {% endif %}
+
+    <hr>
+
+    <h2>Security Recommendation</h2>
+
+    <div class="recommendation">
+
+        {{ recommendation }}
+
+    </div>
+
+    <hr>
+
+    <h2>VirusTotal Threat Intelligence</h2>
+
+    {% if vt_stats %}
+
+    <div class="vt-card">
+
+        <p>🟢 Harmless : {{ vt_stats.harmless }}</p>
+
+        <p>🔴 Malicious : {{ vt_stats.malicious }}</p>
+
+        <p>🟡 Suspicious : {{ vt_stats.suspicious }}</p>
+
+        <p>⚪ Undetected : {{ vt_stats.undetected }}</p>
+
+    </div>
+
+    {% else %}
+
+        <p>VirusTotal scan unavailable.</p>
+
+    {% endif %}
+
+    <hr>
+
+    <h2>🌐 WHOIS Information</h2>
+
+    {% if domain_info %}
+
+    <table class="feature-table">
+
+        <tr>
+
+            <th>Property</th>
+
+            <th>Value</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Domain</td>
+
+            <td>{{ domain_info.domain }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Registrar</td>
+
+            <td>{{ domain_info.registrar }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Creation Date</td>
+
+            <td>{{ domain_info.creation_date }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Expiration Date</td>
+
+            <td>{{ domain_info.expiration_date }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Domain Age</td>
+
+            <td>{{ domain_info.domain_age }} Years</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Status</td>
+
+            <td>{{ domain_info.age_status }}</td>
+
+        </tr>
+
+    </table>
+
+    {% else %}
+
+        <p>WHOIS information unavailable.</p>
+
+    {% endif %}
+
+    <hr>
+
+    <h2>🔒 SSL Certificate Information</h2>
+
+    {% if ssl_info.valid %}
+
+    <table class="feature-table">
+
+        <tr>
+
+            <th>Property</th>
+
+            <th>Value</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Status</td>
+
+            <td>✅ Valid</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Issued By</td>
+
+            <td>{{ ssl_info.issuer }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Expiry Date</td>
+
+            <td>{{ ssl_info.expiry_date }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Days Remaining</td>
+
+            <td>{{ ssl_info.days_remaining }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Certificate Health</td>
+
+            <td>{{ ssl_info.certificate_status }}</td>
+
+        </tr>
+
+    </table>
+
+    {% else %}
+
+        <p>❌ SSL Certificate information unavailable.</p>
+
+    {% endif %}
+
+    <br><br>
+
+    <a href="/download-report">
+
+        <button>
+
+            📄 Download PDF Report
+
+        </button>
+
+    </a>
+
+    <br><br>
+
+    <a href="/history">
+
+        📜 View Scan History
+
+    </a>
+
+    <br><br>
+
+    <a href="/dashboard">
+
+        📊 Dashboard
+
+    </a>
+
+    <br><br>
+
+    <a href="/">
+
+        ⬅ Analyze Another URL
+
+    </a>
+
 </div>
-<br>
-<center>
-<h2>VirusTotal Intelligence Scan</h2>
-
-{% if vt_stats %}
-
-<div class="vt-card">
-
-<h3>VirusTotal Report</h3>
-
-<p>🟢 Harmless : {{ vt_stats.harmless }}</p>
-
-<p>🔴 Malicious : {{ vt_stats.malicious }}</p>
-
-<p>🟡 Suspicious : {{ vt_stats.suspicious }}</p>
-
-<p>⚪ Undetected : {{ vt_stats.undetected }}</p>
-
-</div>
-
-{% else %}
-
-<p>VirusTotal scan unavailable.</p>
-
-{% endif %}
-</center>
-<br>
-<h2>🌐 Domain Information (WHOIS)</h2>
-
-{% if domain_info %}
-
-<table class="feature-table">
-
-<tr>
-    <th>Property</th>
-    <th>Value</th>
-</tr>
-
-<tr>
-    <td>Registrar</td>
-    <td>{{ domain_info.registrar }}</td>
-</tr>
-
-<tr>
-    <td>Creation Date</td>
-    <td>{{ domain_info.creation_date }}</td>
-</tr>
-
-<tr>
-    <td>Expiration Date</td>
-    <td>{{ domain_info.expiration_date }}</td>
-</tr>
-
-<tr>
-    <td>Domain Age</td>
-    <td>{{ domain_info.domain_age }} Years</td>
-</tr>
-<tr>
-    <td>Domain Status</td>
-    <td>{{ domain_info.age_status }}</td>
-</tr>
-
-</table>
-
-{% else %}
-
-<p>WHOIS information is unavailable.</p>
-
-{% endif %}
-<br>
-<h2>🔒 SSL Certificate Information</h2>
-
-{% if ssl_info.valid %}
-
-<table class="feature-table">
-
-<tr>
-    <th>Property</th>
-    <th>Value</th>
-</tr>
-
-<tr>
-    <td>Status</td>
-    <td>✅ Valid</td>
-</tr>
-
-<tr>
-    <td>Issued By</td>
-    <td>{{ ssl_info.issuer }}</td>
-</tr>
-
-<tr>
-    <td>Expiry Date</td>
-    <td>{{ ssl_info.expiry_date }}</td>
-</tr>
-
-<tr>
-    <td>Days Remaining</td>
-    <td>{{ ssl_info.days_remaining }}</td>
-</tr>
-<tr>
-    <td>Certificate Status</td>
-    <td>{{ ssl_info.certificate_status }}</td>
-</tr>
-
-</table>
-
-{% else %}
-
-<p>❌ SSL Certificate Not Available</p>
-
-{% endif %}
-<br><br>
-
-<a href="/download-report">
-    <button>
-        📄 Download PDF Report
-    </button>
-</a>
-<br><br><br>
-<a href="/">Analyze another URL</a>
-<br><br><br>
-<a href="/history">
-📜 View Scan History
-</a>
-</div>
-
-
 
 </body>
 

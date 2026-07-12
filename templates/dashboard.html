@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishShield Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 PhishShield Dashboard</h1>
+
+    <p>Overview of all scanned URLs.</p>
+
+    <div class="stats">
+
+        <div class="card">
+            <h2>Total Scans</h2>
+            <h1>{{ stats.total }}</h1>
+        </div>
+
+        <div class="card">
+            <h2>🔴 High Risk</h2>
+            <h1 class="high">{{ stats.high }}</h1>
+        </div>
+
+        <div class="card">
+            <h2>🟡 Medium Risk</h2>
+            <h1 class="medium">{{ stats.medium }}</h1>
+        </div>
+
+        <div class="card">
+            <h2>🟢 Low Risk</h2>
+            <h1 class="low">{{ stats.low }}</h1>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <h2>📈 Risk Distribution</h2>
+
+    {% if stats.total > 0 %}
+
+    <div style="max-width:500px; margin:auto;">
+        <canvas id="riskChart"></canvas>
+    </div>
+
+    {% else %}
+
+    <p>No scans available to display chart.</p>
+
+    {% endif %}
+
+    <hr>
+
+    <h2>📜 Recent Scans</h2>
+
+    <table class="feature-table">
+
+        <tr>
+            <th>URL</th>
+            <th>Risk Level</th>
+            <th>Scan Time</th>
+        </tr>
+
+        {% if recent %}
+
+            {% for row in recent %}
+
+            <tr>
+
+                <td>{{ row[0] }}</td>
+
+                <td>
+
+                    {% if row[1] == "Low Risk" %}
+
+                        <span class="low">🟢 {{ row[1] }}</span>
+
+                    {% elif row[1] == "Medium Risk" %}
+
+                        <span class="medium">🟡 {{ row[1] }}</span>
+
+                    {% else %}
+
+                        <span class="high">🔴 {{ row[1] }}</span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ row[2] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        {% else %}
+
+            <tr>
+
+                <td colspan="3">
+                    No scan history available.
+                </td>
+
+            </tr>
+
+        {% endif %}
+
+    </table>
+
+    <br><br>
+
+    <a href="/">🏠 Back to Home</a>
+
+</div>
+
+{% if stats.total > 0 %}
+
+<script>
+
+const ctx = document.getElementById("riskChart");
+
+new Chart(ctx, {
+
+    type: "pie",
+
+    data: {
+
+        labels: [
+            "High Risk",
+            "Medium Risk",
+            "Low Risk"
+        ],
+
+        datasets: [{
+    data: {{ [stats.high, stats.medium, stats.low] | tojson }},
+    backgroundColor: [
+        "#ef4444",
+        "#f59e0b",
+        "#22c55e"
+    ]
+}]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                position: "bottom"
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% endif %}
+
+</body>
+
+</html>
