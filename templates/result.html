@@ -99,8 +99,48 @@ Risk Level:
 <p>{{ recommendation }}</p>
 
 <br>
+<center>
+<h2>VirusTotal Scan</h2>
 
-<a href="/">Analyze another URL</a>3
+{% if vt_stats %}
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Engine Result</th>
+    <th>Count</th>
+</tr>
+
+<tr>
+    <td>Malicious</td>
+    <td>{{ vt_stats.malicious }}</td>
+</tr>
+
+<tr>
+    <td>Suspicious</td>
+    <td>{{ vt_stats.suspicious }}</td>
+</tr>
+
+<tr>
+    <td>Harmless</td>
+    <td>{{ vt_stats.harmless }}</td>
+</tr>
+
+<tr>
+    <td>Undetected</td>
+    <td>{{ vt_stats.undetected }}</td>
+</tr>
+
+</table>
+
+{% else %}
+
+<p>VirusTotal scan unavailable.</p>
+
+{% endif %}
+</center>
+<br>
+<a href="/">Analyze another URL</a>
 
 </div>
 
