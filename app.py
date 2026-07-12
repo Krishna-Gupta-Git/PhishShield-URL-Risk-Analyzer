@@ -9,7 +9,10 @@ from database import (
     save_scan,
     get_history
 )
+from report_generator import generate_report
+from flask import send_file
 
+latest_report = {}
 app = Flask(__name__)
 initialize_database()
 
@@ -66,6 +69,17 @@ def analyze():
         domain_info=domain_info,
         ssl_info=ssl_info
     )
+    global latest_report
+    latest_report = {
+    "url": url,
+    "score": score,
+    "risk_level": risk_level,
+    "recommendation": recommendation,
+    "result": result,
+    "vt_stats": vt_stats,
+    "domain_info": domain_info,
+    "ssl_info": ssl_info
+}
 @app.route("/history")
 def history():
 
@@ -74,6 +88,29 @@ def history():
     return render_template(
         "history.html",
         history=history_data
+    )
+    
+
+@app.route("/download-report")
+def download_report():
+
+    filename = "PhishShield_Report.pdf"
+
+    generate_report(
+        filename,
+        latest_report["url"],
+        latest_report["score"],
+        latest_report["risk_level"],
+        latest_report["recommendation"],
+        latest_report["result"],
+        latest_report["vt_stats"],
+        latest_report["domain_info"],
+        latest_report["ssl_info"]
+    )
+
+    return send_file(
+        filename,
+        as_attachment=True
     )
 
 
