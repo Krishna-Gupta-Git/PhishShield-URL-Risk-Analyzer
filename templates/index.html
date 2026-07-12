@@ -2,36 +2,40 @@
 <html>
 
 <head>
-    <title>PhishShield</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>PhishShield URL Risk Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>🛡️ PhishShield URL Risk Analyzer</h1>
+    <h1>🛡️ PhishShield</h1>
 
-        <p>
-            Enter a website URL to analyze whether it may be phishing.
-        </p>
+    <h2>Advanced URL Risk Analyzer</h2>
 
-            <form action="/analyze" method="POST">
+    <p>
+        Detect phishing websites using
+        heuristic analysis and VirusTotal threat intelligence.
+    </p>
 
-    <input
-        type="text"
-        name="url"
-        placeholder="https://example.com"
-        required
-    >
+    <form action="/analyze" method="POST">
 
-    <button type="submit">
-        Analyze URL
-    </button>
+        <input
+            type="text"
+            name="url"
+            placeholder="Enter URL (https://example.com)"
+            required>
 
-</form>
+        <button type="submit">
+            Analyze URL
+        </button>
 
-    </div>
+    </form>
+
+</div>
 
 </body>
 

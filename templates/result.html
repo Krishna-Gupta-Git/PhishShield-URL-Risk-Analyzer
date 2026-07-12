@@ -10,34 +10,51 @@
 
 <div class="container">
 
-<h2>Analysis Result</h2>
-<p><strong>URL:</strong> {{ url }}</p>
+<h1>🛡️ PhishShield</h1>
 
-<h3>Risk Score: {{ score }}%</h3>
+<h2>Analysis Report</h2>
 
-<h3>
-Risk Level:
+<p>
+<strong>Scanned URL:</strong><br>
+{{ url }}
+</p>
+
+<h2>Risk Score</h2>
+
+<h3>{{ score }}%</h3>
+<div class="progress-container">
+
+<div
+class="progress-bar
+
+{% if score >= 70 %}
+high-bar
+{% elif score >= 40 %}
+medium-bar
+{% else %}
+low-bar
+{% endif %}"
+ {{ score }}%;>
+</div>
+
+</div>
+<h2>Risk Level</h2>
 
 {% if risk_level == "Low Risk" %}
-<span style="color:green;">
-    {{ risk_level }}
-</span>
+<p class="low">🟢 {{ risk_level }}</p>
 
 {% elif risk_level == "Medium Risk" %}
-<span style="color:orange;">
-    {{ risk_level }}
-</span>
+<p class="medium">🟡 {{ risk_level }}</p>
 
 {% else %}
-<span style="color:red;">
-    {{ risk_level }}
-</span>
+<p class="high">🔴 {{ risk_level }}</p>
+
 {% endif %}
 
 </h3>
 <center>
-<table border="1" cellpadding="10">
-
+    <h2>URL Feature Analysis</h2>
+<table class="feature-table">
 <tr>
     <th>Feature</th>
     <th>Result</th>
@@ -80,6 +97,7 @@ Risk Level:
 
 </table>
 </center>
+
 <br>
 {% if reasons %}
 <h3>Detected Issues</h3>
@@ -94,44 +112,30 @@ Risk Level:
 <p>No suspicious indicators detected.</p>
 {% endif %}
 
-<h3>Recommendation</h3>
+<h3>Security Recommendation</h3>
 
-<p>{{ recommendation }}</p>
-
+<div class="recommendation">
+{{ recommendation }}
+</div>
 <br>
 <center>
-<h2>VirusTotal Scan</h2>
+<h2>VirusTotal Intelligence Scan</h2>
 
 {% if vt_stats %}
 
-<table border="1" cellpadding="10">
+<div class="vt-card">
 
-<tr>
-    <th>Engine Result</th>
-    <th>Count</th>
-</tr>
+<h3>VirusTotal Report</h3>
 
-<tr>
-    <td>Malicious</td>
-    <td>{{ vt_stats.malicious }}</td>
-</tr>
+<p>🟢 Harmless : {{ vt_stats.harmless }}</p>
 
-<tr>
-    <td>Suspicious</td>
-    <td>{{ vt_stats.suspicious }}</td>
-</tr>
+<p>🔴 Malicious : {{ vt_stats.malicious }}</p>
 
-<tr>
-    <td>Harmless</td>
-    <td>{{ vt_stats.harmless }}</td>
-</tr>
+<p>🟡 Suspicious : {{ vt_stats.suspicious }}</p>
 
-<tr>
-    <td>Undetected</td>
-    <td>{{ vt_stats.undetected }}</td>
-</tr>
+<p>⚪ Undetected : {{ vt_stats.undetected }}</p>
 
-</table>
+</div>
 
 {% else %}
 
