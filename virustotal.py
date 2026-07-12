@@ -1,7 +1,11 @@
 import requests
 import time
+import os
+from dotenv import load_dotenv
 
-API_KEY = "YOUR_VIRUSTOTAL_API_KEY"
+load_dotenv()
+
+API_KEY = os.getenv("VT_API_KEY")
 BASE_URL = "https://www.virustotal.com/api/v3"
 
 
