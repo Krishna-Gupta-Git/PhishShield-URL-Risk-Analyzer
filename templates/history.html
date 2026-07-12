@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Scan History</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📜 Scan History</h1>
+
+<table class="feature-table">
+
+<tr>
+
+<th>ID</th>
+
+<th>URL</th>
+
+<th>Risk Score</th>
+
+<th>Risk Level</th>
+
+<th>Scan Time</th>
+
+</tr>
+
+{% for scan in history %}
+
+<tr>
+
+<td>{{ scan[0] }}</td>
+
+<td>{{ scan[1] }}</td>
+
+<td>{{ scan[2] }}%</td>
+
+<td>{{ scan[3] }}</td>
+
+<td>{{ scan[4] }}</td>
+
+</tr>
+
+{% endfor %}
+<td>
+{% if scan[3] == "Low Risk" %}
+<span class="low">🟢 {{ scan[3] }}</span>
+
+{% elif scan[3] == "Medium Risk" %}
+<span class="medium">🟡 {{ scan[3] }}</span>
+
+{% else %}
+<span class="high">🔴 {{ scan[3] }}</span>
+
+{% endif %}
+</td>
+
+</table>
+
+<br>
+
+<a href="/">← Back to Home</a>
+
+</div>
+
+</body>
+
+</html>
