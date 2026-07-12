@@ -144,6 +144,45 @@ low-bar
 {% endif %}
 </center>
 <br>
+<h2>🌐 Domain Information (WHOIS)</h2>
+
+{% if domain_info %}
+
+<table class="feature-table">
+
+<tr>
+    <th>Property</th>
+    <th>Value</th>
+</tr>
+
+<tr>
+    <td>Registrar</td>
+    <td>{{ domain_info.registrar }}</td>
+</tr>
+
+<tr>
+    <td>Creation Date</td>
+    <td>{{ domain_info.creation_date }}</td>
+</tr>
+
+<tr>
+    <td>Expiration Date</td>
+    <td>{{ domain_info.expiration_date }}</td>
+</tr>
+
+<tr>
+    <td>Domain Age</td>
+    <td>{{ domain_info.domain_age }} Years</td>
+</tr>
+
+</table>
+
+{% else %}
+
+<p>WHOIS information is unavailable.</p>
+
+{% endif %}
+<br>
 <a href="/">Analyze another URL</a>
 
 </div>

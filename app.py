@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from analyzer import analyze_url
 from scorer import calculate_risk
 from virustotal import submit_url, get_analysis
+from whois_lookup import get_domain_info
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ def analyze():
     url = request.form["url"]
 
     result = analyze_url(url)
-
+    domain_info = get_domain_info(url)
     score, reasons = calculate_risk(result)
 
     if score <= 2:
@@ -46,7 +47,8 @@ def analyze():
         reasons=reasons,
         risk_level=risk_level,
         recommendation=recommendation,
-        vt_stats=vt_stats
+        vt_stats=vt_stats,
+        domain_info=domain_info
     )
 
 
