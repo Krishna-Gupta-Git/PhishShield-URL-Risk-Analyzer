@@ -187,6 +187,49 @@ low-bar
 
 {% endif %}
 <br>
+<h2>🔒 SSL Certificate Information</h2>
+
+{% if ssl_info.valid %}
+
+<table class="feature-table">
+
+<tr>
+    <th>Property</th>
+    <th>Value</th>
+</tr>
+
+<tr>
+    <td>Status</td>
+    <td>✅ Valid</td>
+</tr>
+
+<tr>
+    <td>Issued By</td>
+    <td>{{ ssl_info.issuer }}</td>
+</tr>
+
+<tr>
+    <td>Expiry Date</td>
+    <td>{{ ssl_info.expiry_date }}</td>
+</tr>
+
+<tr>
+    <td>Days Remaining</td>
+    <td>{{ ssl_info.days_remaining }}</td>
+</tr>
+<tr>
+    <td>Certificate Status</td>
+    <td>{{ ssl_info.certificate_status }}</td>
+</tr>
+
+</table>
+
+{% else %}
+
+<p>❌ SSL Certificate Not Available</p>
+
+{% endif %}
+<br>
 <a href="/">Analyze another URL</a>
 
 </div>

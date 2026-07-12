@@ -3,6 +3,7 @@ from analyzer import analyze_url
 from scorer import calculate_risk
 from virustotal import submit_url, get_analysis
 from whois_lookup import get_domain_info
+from ssl_checker import get_ssl_info
 
 app = Flask(__name__)
 
@@ -17,6 +18,7 @@ def analyze():
 
     result = analyze_url(url)
     domain_info = get_domain_info(url)
+    ssl_info = get_ssl_info(url)
     score, reasons = calculate_risk(result)
 
     if score <= 2:
@@ -48,7 +50,8 @@ def analyze():
         risk_level=risk_level,
         recommendation=recommendation,
         vt_stats=vt_stats,
-        domain_info=domain_info
+        domain_info=domain_info,
+        ssl_info=ssl_info
     )
 
 
