@@ -14,50 +14,44 @@ def get_ssl_info(url):
     """
 
     try:
-        # Extract hostname from the URL
+        # Add https:// if the user didn't include a scheme
+        if not url.startswith(("http://", "https://")):
+            url = "https://" + url
+
         parsed_url = urlparse(url)
-        hostname = parsed_url.netloc
+        hostname = parsed_url.hostname
 
-        # Remove 'www.' if present
-        if hostname.startswith("www."):
-            hostname = hostname[4:]
+        if not hostname:
+            raise ValueError("Invalid hostname")
 
-        # Create default SSL context
+        # Create SSL context
         context = ssl.create_default_context()
 
-        # Connect to the server on port 443 (HTTPS)
-        with socket.create_connection((hostname, 443), timeout=5) as sock:
+        # Connect to server
+        with socket.create_connection((hostname, 443), timeout=10) as sock:
             with context.wrap_socket(sock, server_hostname=hostname) as secure_socket:
-
-                # Get SSL certificate
                 certificate = secure_socket.getpeercert()
 
-        # Get certificate issuer
-        issuer = dict(item[0] for item in certificate["issuer"])
-
+        # Certificate issuer
+        issuer = dict(x[0] for x in certificate.get("issuer", []))
         issued_by = issuer.get("organizationName", "Unknown")
 
-        # Certificate expiry date
+        # Expiry date
         expiry_string = certificate["notAfter"]
-
         expiry_date = datetime.strptime(
             expiry_string,
             "%b %d %H:%M:%S %Y %Z"
         )
 
-        # Calculate remaining days
-        days_remaining = (expiry_date - datetime.now()).days
+        days_remaining = (expiry_date - datetime.utcnow()).days
 
-        # Determine certificate health
+        # Certificate health
         if days_remaining < 0:
             certificate_status = "❌ Expired"
-
         elif days_remaining < 30:
             certificate_status = "⚠️ Expiring Soon"
-
         elif days_remaining < 90:
             certificate_status = "🟡 Valid (Near Expiry)"
-
         else:
             certificate_status = "🟢 Healthy"
 
@@ -74,7 +68,7 @@ def get_ssl_info(url):
 
         return {
             "valid": False,
-            "issuer": "Unknown",
+            "issuer": "Unavailable",
             "expiry_date": "Unavailable",
             "days_remaining": 0,
             "certificate_status": "❌ Invalid or Unavailable"
