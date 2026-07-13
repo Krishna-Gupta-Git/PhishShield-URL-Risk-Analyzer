@@ -115,43 +115,43 @@ http://127.0.0.1:5000
 
 ## 🏠 Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](screenshots/HOME.png)
 
 ---
 
 ## 📄 Analysis Result 1
 
-![Analysis Result 1](screenshots/result1.png)
+![Analysis Result 1](screenshots/RESULT1.png)
 
 ---
 
 ## 📄 Analysis Result 2
 
-![Analysis Result 2](screenshots/result2.png)
+![Analysis Result 2](screenshots/RESULT2.png)
 
 ---
 
 ## 📄 Analysis Result 3
 
-![Analysis Result 3](screenshots/result3.png)
+![Analysis Result 3](screenshots/RESULT3.png)
 
 ---
 
 ## 📊 Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/DASHBOARD.png)
 
 ---
 
 ## 📜 Scan History
 
-![History](screenshots/history.png)
+![History](screenshots/HISTORY.png)
 
 ---
 
 ## 📑 PDF Report
 
-![PDF Report](screenshots/report.png)
+![PDF Report](screenshots/REPORT.png)
 
 ---
 
