@@ -1,4 +1,9 @@
-/* Reset */
+/* ================================
+   PHISHSHIELD STYLE.CSS (PART 1)
+   Global Styles + Home + Result
+==================================*/
+
+/* ---------- RESET ---------- */
 
 *{
     margin:0;
@@ -7,48 +12,55 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-/* Body */
+html{
+    scroll-behavior:smooth;
+}
+
+/* ---------- BODY ---------- */
 
 body{
 
-    background:linear-gradient(135deg,#0f172a,#1e293b);
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
 
-    color:white;
+    color:#f8fafc;
 
     min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
 
     padding:40px;
 
 }
 
-/* Main Card */
+/* ---------- CONTAINER ---------- */
 
 .container{
-
-    background:#1e293b;
 
     width:900px;
 
     max-width:100%;
 
+    margin:auto;
+
+    background:#1e293b;
+
+    border-radius:18px;
+
     padding:35px;
 
-    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
 
-    box-shadow:0 0 25px rgba(0,0,0,.4);
-    @keyframes fadeIn{
+    animation:fadeIn .6s ease;
+
+}
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes fadeIn{
 
 from{
 
 opacity:0;
 
-transform:translateY(30px);
+transform:translateY(20px);
 
 }
 
@@ -62,101 +74,165 @@ transform:translateY(0);
 
 }
 
-}
-
-/* Headings */
+/* ---------- HEADINGS ---------- */
 
 h1{
 
     text-align:center;
 
-    margin-bottom:10px;
+    color:#ffffff;
 
     font-size:38px;
+
+    margin-bottom:15px;
 
 }
 
 h2{
 
-    margin-bottom:15px;
+    color:#f8fafc;
+
+    margin:25px 0 15px;
 
 }
 
 h3{
 
-    margin-top:20px;
+    color:#e2e8f0;
+
+    margin:20px 0 12px;
+
+}
+
+/* ---------- PARAGRAPH ---------- */
+
+p{
+
+    color:#cbd5e1;
+
+    line-height:1.7;
 
     margin-bottom:15px;
 
 }
 
-/* Paragraph */
-
-p{
-
-    margin-bottom:20px;
-
-    line-height:1.6;
-
-}
-
-/* Input */
+/* ---------- INPUT ---------- */
 
 input{
 
     width:100%;
 
-    padding:15px;
+    padding:16px;
+
+    font-size:16px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    margin-top:15px;
+    margin:20px 0;
 
-    margin-bottom:20px;
+    outline:none;
 
-    font-size:17px;
+    background:#334155;
+
+    color:white;
 
 }
 
-/* Button */
+input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* ---------- BUTTON ---------- */
 
 button{
 
-padding:16px;
+    width:100%;
 
-font-size:18px;
+    padding:16px;
 
-font-weight:bold;
+    border:none;
 
-background:#2563eb;
+    border-radius:12px;
 
-border:none;
+    background:#2563eb;
 
-border-radius:12px;
+    color:white;
 
-cursor:pointer;
+    font-size:17px;
 
-transition:.3s;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
 
 }
 
 button:hover{
 
-transform:translateY(-2px);
-
-background:#1d4ed8;
-
-}button:hover{
-
     background:#1d4ed8;
+
+    transform:translateY(-2px);
 
 }
 
-/* Table */
+/* ---------- LINKS ---------- */
 
-table{
+a{
+
+    color:#60a5fa;
+
+    text-decoration:none;
+
+}
+
+a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ---------- BUTTON LINKS ---------- */
+
+.btn{
+
+    display:inline-block;
+
+    padding:12px 20px;
+
+    margin:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+    text-decoration:none;
+
+}
+
+/* ---------- TABLE ---------- */
+
+.feature-table{
 
     width:100%;
 
@@ -166,26 +242,51 @@ table{
 
 }
 
-table th{
+.feature-table th{
 
     background:#2563eb;
 
     color:white;
 
+    padding:14px;
+
 }
 
-table th,
-table td{
+.feature-table td{
 
-    padding:12px;
+    background:#273549;
+
+    color:#f8fafc;
+
+    padding:14px;
 
     border:1px solid #475569;
 
-    text-align:center;
+}
+
+.feature-table tr:hover td{
+
+    background:#334155;
 
 }
 
-/* Risk Colors */
+/* ---------- LIST ---------- */
+
+ul{
+
+    margin-left:25px;
+
+    margin-top:10px;
+
+}
+
+li{
+
+    margin-bottom:8px;
+
+}
+
+/* ---------- RISK COLORS ---------- */
 
 .low{
 
@@ -211,159 +312,133 @@ table td{
 
 }
 
-/* Links */
+/* ---------- SCORE CARD ---------- */
 
-a{
+.score-card{
 
-    color:#60a5fa;
+    background:#0f172a;
 
-    text-decoration:none;
+    border:1px solid #334155;
 
-}
+    border-radius:15px;
 
-a:hover{
+    padding:25px;
 
-    text-decoration:underline;
+    margin-top:25px;
 
-}
-
-/* List */
-
-ul{
-
-    margin-left:25px;
-
-    margin-top:15px;
+    text-align:center;
 
 }
 
-li{
+.score-card h2{
+
+    color:#cbd5e1;
 
     margin-bottom:10px;
 
 }
 
-/* Responsive */
+.score-card h1{
 
-@media(max-width:768px){
+    font-size:60px;
 
-.container{
-
-    width:100%;
+    color:#3b82f6;
 
 }
 
-h1{
+/* ---------- PROGRESS BAR ---------- */
 
-    font-size:28px;
-
-}
-
-}
 .progress-container{
+
     width:100%;
-    height:20px;
-    background:#475569;
-    border-radius:20px;
+
+    height:28px;
+
+    background:#334155;
+
+    border-radius:30px;
+
     overflow:hidden;
-    margin-bottom:25px;
+
+    margin:25px 0;
+
 }
 
 .progress-bar{
+
     height:100%;
-    background:#22c55e;
-    transition:width .6s;
-}
-.low-bar{
-    background:#22c55e;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    transition:width .7s ease;
+
 }
 
-.medium-bar{
+.progress-bar.low{
+
+    background:#22c55e;
+
+}
+
+.progress-bar.medium{
+
     background:#f59e0b;
+
 }
 
-.high-bar{
+.progress-bar.high{
+
     background:#ef4444;
+
 }
+
+/* ---------- RECOMMENDATION ---------- */
+
 .recommendation{
 
-background:#334155;
+    margin:25px 0;
 
-padding:20px;
+    padding:20px;
 
-border-left:5px solid #2563eb;
+    border-left:5px solid #2563eb;
 
-border-radius:10px;
+    border-radius:12px;
 
-margin-bottom:20px;
-
-line-height:1.7;
-
-}
-.vt-card{
-
-background:#0f172a;
-
-padding:20px;
-
-margin-top:20px;
-
-border-radius:12px;
-
-border:1px solid #475569;
+    background:#0f172a;
 
 }
 
-.vt-card p{
+.recommendation h3{
 
-margin-bottom:10px;
+    color:white;
 
-}
-.feature-table{
-
-margin-top:20px;
+    margin-bottom:10px;
 
 }
 
-.feature-table tr:hover{
+.recommendation p{
 
-background:#334155;
+    margin:0;
 
-}
-.stats{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-
-gap:20px;
-
-margin-top:30px;
+    color:#cbd5e1;
 
 }
+/* ===================================
+   PHISHSHIELD STYLE.CSS (PART 2)
+   Dashboard + History + Cards
+===================================*/
 
-.card{
-
-background:#0f172a;
-
-padding:20px;
-
-border-radius:15px;
-
-text-align:center;
-
-box-shadow:0 0 10px rgba(0,0,0,.3);
-
-transition:.3s;
-
-}
-
-.card:hover{
-
-transform:translateY(-5px);
-
-}
-/* Dashboard Cards */
+/* ---------- DASHBOARD STATS ---------- */
 
 .stats{
 
@@ -373,7 +448,7 @@ transform:translateY(-5px);
 
     gap:20px;
 
-    margin:30px 0;
+    margin:35px 0;
 
 }
 
@@ -381,40 +456,703 @@ transform:translateY(-5px);
 
     background:#0f172a;
 
-    padding:25px;
+    border:1px solid #334155;
 
-    border-radius:15px;
+    border-radius:18px;
+
+    padding:25px;
 
     text-align:center;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
+    transition:.35s;
 
-    transition:0.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
 
 }
 
 .card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-6px);
+
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+
+}
+
+.card h2{
+
+    color:#cbd5e1;
+
+    font-size:18px;
+
+    margin-bottom:15px;
 
 }
 
 .card h1{
 
-    margin-top:15px;
+    font-size:48px;
 
-    font-size:40px;
+    color:#3b82f6;
 
 }
 
-/* Dashboard Chart */
+/* ---------- CHART ---------- */
 
 canvas{
 
-    max-width:500px;
+    display:block;
+
+    margin:30px auto;
+
+    max-width:450px;
+
+    background:#0f172a;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    border:1px solid #334155;
+
+}
+
+/* ---------- VIRUSTOTAL CARD ---------- */
+
+.vt-card{
+
+    background:#0f172a;
+
+    border:1px solid #334155;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-top:25px;
+
+}
+
+.vt-card p{
+
+    margin:10px 0;
+
+}
+
+/* ---------- INFO CARDS ---------- */
+
+.info-card{
+
+    background:#0f172a;
+
+    border:1px solid #334155;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-top:25px;
+
+}
+
+.info-card h3{
+
+    color:#60a5fa;
+
+    margin-bottom:15px;
+
+}
+
+/* ---------- HISTORY TABLE ---------- */
+
+.feature-table{
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+}
+
+.feature-table th{
+
+    position:sticky;
+
+    top:0;
+
+}
+
+.feature-table tr{
+
+    transition:.25s;
+
+}
+
+.feature-table tr:hover{
+
+    transform:scale(1.01);
+
+}
+
+/* ---------- BADGES ---------- */
+
+.badge{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.badge.low{
+
+    background:#14532d;
+
+    color:#4ade80;
+
+}
+
+.badge.medium{
+
+    background:#78350f;
+
+    color:#fde047;
+
+}
+
+.badge.high{
+
+    background:#7f1d1d;
+
+    color:#f87171;
+
+}
+
+/* ---------- HOME PAGE ---------- */
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.hero h1{
+
+    font-size:44px;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+    color:#cbd5e1;
+
+}
+
+/* ---------- BUTTON GROUP ---------- */
+
+.button-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+
+}
+
+/* ---------- DIVIDER ---------- */
+
+hr{
+
+    border:none;
+
+    border-top:1px solid #334155;
+
+    margin:30px 0;
+
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#3b82f6;
+
+}
+
+/* ---------- TABLE ANIMATION ---------- */
+
+.feature-table tr{
+
+    animation:fadeRow .4s ease;
+
+}
+
+@keyframes fadeRow{
+
+from{
+
+opacity:0;
+
+transform:translateX(-10px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+}
+
+/* ---------- CARD TITLES ---------- */
+
+.section-title{
+
+    color:#60a5fa;
+
+    font-size:24px;
+
+    margin-bottom:20px;
+
+    border-left:4px solid #2563eb;
+
+    padding-left:12px;
+
+}
+
+/* ---------- STATUS BOX ---------- */
+
+.status-box{
+
+    padding:18px;
+
+    border-radius:12px;
+
+    background:#0f172a;
+
+    border:1px solid #334155;
+
+    margin:20px 0;
+
+}
+
+.status-box p{
+
+    margin:8px 0;
+
+}
+
+/* ---------- SHADOW EFFECT ---------- */
+
+.shadow{
+
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:40px;
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+}
+/* ===================================
+   PHISHSHIELD STYLE.CSS (PART 3)
+   Responsive + Utilities + Polish
+===================================*/
+
+/* ---------- FLEX HELPERS ---------- */
+
+.flex{
+    display:flex;
+}
+
+.flex-center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.space-between{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+/* ---------- SPACING ---------- */
+
+.mt-10{margin-top:10px;}
+.mt-20{margin-top:20px;}
+.mt-30{margin-top:30px;}
+.mt-40{margin-top:40px;}
+
+.mb-10{margin-bottom:10px;}
+.mb-20{margin-bottom:20px;}
+.mb-30{margin-bottom:30px;}
+.mb-40{margin-bottom:40px;}
+
+/* ---------- TEXT ---------- */
+
+.text-center{
+    text-align:center;
+}
+
+.text-left{
+    text-align:left;
+}
+
+.text-right{
+    text-align:right;
+}
+
+.text-small{
+    font-size:14px;
+}
+
+.text-large{
+    font-size:22px;
+}
+
+.text-muted{
+    color:#94a3b8;
+}
+
+/* ---------- ALERT BOXES ---------- */
+
+.alert{
+
+    padding:18px;
+
+    border-radius:12px;
+
+    margin:20px 0;
+
+    font-weight:bold;
+
+}
+
+.alert-success{
+
+    background:#14532d;
+
+    color:#bbf7d0;
+
+    border-left:5px solid #22c55e;
+
+}
+
+.alert-warning{
+
+    background:#78350f;
+
+    color:#fde68a;
+
+    border-left:5px solid #f59e0b;
+
+}
+
+.alert-danger{
+
+    background:#7f1d1d;
+
+    color:#fecaca;
+
+    border-left:5px solid #ef4444;
+
+}
+
+/* ---------- IMAGE ---------- */
+
+img{
+
+    max-width:100%;
+
+    border-radius:12px;
+
+}
+
+/* ---------- HOVER EFFECT ---------- */
+
+.container:hover{
+
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+}
+
+/* ---------- TABLE STRIPES ---------- */
+
+.feature-table tr:nth-child(even) td{
+
+    background:#223046;
+
+}
+
+/* ---------- INPUT FOCUS ---------- */
+
+input:focus{
+
+    border:2px solid #3b82f6;
+
+    background:#293548;
+
+}
+
+/* ---------- BUTTON ACTIVE ---------- */
+
+button:active,
+.btn:active{
+
+    transform:scale(.97);
+
+}
+
+/* ---------- FADE ---------- */
+
+.fade{
+
+    animation:fadeIn .6s ease;
+
+}
+
+/* ---------- LOADING ---------- */
+
+.loading{
+
+    width:40px;
+
+    height:40px;
+
+    border:4px solid #334155;
+
+    border-top:4px solid #2563eb;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
 
     margin:auto;
 
-    display:block;
+}
+
+@keyframes spin{
+
+0%{
+
+transform:rotate(0deg);
 
 }
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:900px){
+
+.container{
+
+    padding:25px;
+
+}
+
+h1{
+
+    font-size:32px;
+
+}
+
+.score-card h1{
+
+    font-size:52px;
+
+}
+
+.stats{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.button-group{
+
+    flex-direction:column;
+
+}
+
+.btn{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:600px){
+
+body{
+
+    padding:15px;
+
+}
+
+.container{
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+h1{
+
+    font-size:26px;
+
+}
+
+h2{
+
+    font-size:22px;
+
+}
+
+.score-card h1{
+
+    font-size:42px;
+
+}
+
+.progress-container{
+
+    height:22px;
+
+}
+
+.feature-table{
+
+    display:block;
+
+    overflow-x:auto;
+
+}
+
+.stats{
+
+    grid-template-columns:1fr;
+
+}
+
+.card h1{
+
+    font-size:38px;
+
+}
+
+button{
+
+    font-size:16px;
+
+}
+
+.btn{
+
+    display:block;
+
+    width:100%;
+
+    margin:10px 0;
+
+}
+
+canvas{
+
+    width:100% !important;
+
+    height:auto !important;
+
+}
+
+}
+
+/* ---------- PRINT ---------- */
+
+@media print{
+
+body{
+
+    background:white;
+
+    color:black;
+
+}
+
+.container{
+
+    box-shadow:none;
+
+    background:white;
+
+}
+
+button,
+.btn{
+
+    display:none;
+
+}
+
+}
+
+/* ---------- END ---------- */
